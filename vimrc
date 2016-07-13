@@ -1,23 +1,24 @@
-" khanny17's .vimrc
+" " khanny17's .vimrc
 " "
-" " Compiled from lots of other vimrc's
-
+" " Compiled from lots of other vimrc's and tutorials, especially:
+" "     - https://github.com/jez/vim-as-an-ide
+" "     - https://gist.github.com/pthrasher/3933522    
 
 " " Setup Vundle:
 " " For this to work, you must install the vundle plugin manually.
 " " https://github.com/gmarik/vundle
 " " To install vundle, copy all the files from the repo into your respective
 " " folders within ~/.vim
+
+
 set nocompatible " Fuck VI... That's for grandpas.
 filetype off
 
+
+" ---------- Vundle Packages ----------
+
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-
-" " Vundle let's you specify a plugin in a number of formats, but my favorite
-" " allows you to grab plugins straight off of github, just specify the bundle
-" " in the following format:
-" " Bundle 'githubUsername/repoName'
 
 " " Let vundle manage itself:
 Plugin 'VundleVim/Vundle.vim'
@@ -46,8 +47,7 @@ Plugin 'majutsushi/tagbar'
 
 " Project Tree Plugin
 Plugin 'scrooloose/nerdtree'
-"Git support
-Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'Xuyuanp/nerdtree-git-plugin' " Git support
 
 " " In addtion to the above plugins, you'll likely need some for individual
 " " non-standard syntaxes that aren't pre-bundled with vim. Here are some I
@@ -72,17 +72,20 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 " " " LessCSS -- I use this every day.
 " Plugin 'groenewege/vim-less'
 "
-" " " Coffee-script syntax.
-" Bundle 'kchmck/vim-coffee-script'
-"
-"
+
 call vundle#end()
+
+
+" ---------- End Vundle Packages ----------
+
+
 " " We have to turn this stuff back on if we want all of our features.
 filetype plugin indent on " Filetype auto-detection
 syntax on " Syntax highlighting
 
-set mouse=a
-set tabstop=4
+set mouse=a " enable mouse
+
+set tabstop=4 " Tabs are 4 spaces
 set shiftwidth=4
 set softtabstop=4
 set expandtab " use spaces instead of tabs.
@@ -117,8 +120,7 @@ set statusline=[%n]\ %<%.99f\%h%w%m%r%{exists('*CapsLockStatusline')?CapsLockSta
 " " allow the cursor to go anywhere in visual block mode.
 set virtualedit+=block
 
-" " leader is a key that allows you to have your own "namespace" of
-" keybindings.
+" " leader is a key that allows you to have your own "namespace" of keybindings.
 " " You'll see it a lot below as <leader>
 let mapleader = ","
 
@@ -139,9 +141,9 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-" " " Use sane regex's when searching
-" " nnoremap / /\v
-" " vnoremap / /\v
+" " Use sane regex's when searching
+" nnoremap / /\v
+" vnoremap / /\v
 
 " " Clear match highlighting
 noremap <leader><space> :noh<cr>:call clearmatches()<cr>
@@ -149,6 +151,7 @@ noremap <leader><space> :noh<cr>:call clearmatches()<cr>
 " " Quick buffer switching - like cmd-tab'ing
 nnoremap <leader><leader> <c-^>
 
+" Pick a buffer from the open ones
 nnoremap gb :ls<CR>:b<Space>
 
 " " Visual line nav, not real line nav
@@ -215,8 +218,7 @@ nmap <silent> <leader>t :NERDTreeToggle<CR>
 "  " To have NERDTree always open on startup, set this to 1
 "  let g:nerdtree_tabs_open_on_console_startup = 1
 
-"  " " Finally the color scheme. Choose whichever you want from the list in
-"  the
-"  " " link above (back up where we included the bundle of a ton of themes.)
+" " Finally the color scheme. Choose whichever you want from the list in the
+" " link above (back up where we included the bundle of a ton of themes.)
 set t_Co=256
 colorscheme molokai
