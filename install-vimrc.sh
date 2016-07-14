@@ -6,3 +6,10 @@ if [ -f ~/.vimrc ] ; then
 fi
 
 ln -s $SCRIPT_DIR/dotfiles/vimrc ~/.vimrc
+
+# Install Vundle
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
+# Install Vundle Plugins
+vim +PluginInstall
+
