@@ -4,18 +4,19 @@
 " "     - https://github.com/jez/vim-as-an-ide
 " "     - https://gist.github.com/pthrasher/3933522    
 
+" "  -- Installation --
 " " Setup Vundle:
 " " For this to work, you must install the vundle plugin manually.
-" " https://github.com/gmarik/vundle
-" " To install vundle, copy all the files from the repo into your respective
-" " folders within ~/.vim
-
+" " To do so, run:
+" "     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+" " 
+" " Then, to install plugins, run vim +PluginInstall
 
 set nocompatible " Fuck VI... That's for grandpas.
 filetype off
 
 
-" ---------- Vundle Packages ----------
+" " ---------- Vundle Plugins ----------
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -40,54 +41,49 @@ Plugin 'tpope/vim-commentary'
 " Auto insert matching delimiters
 Plugin 'Raimondi/delimitMate'
 
-" Better ctag support
-Plugin 'xolox/vim-misc'
-Plugin 'xolox/vim-easytags'
+" Tags within files 
 Plugin 'majutsushi/tagbar'
 
 " Project Tree Plugin
 Plugin 'scrooloose/nerdtree'
-Plugin 'Xuyuanp/nerdtree-git-plugin' " Git support
+" Git support for NERDTree
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 
-" " In addtion to the above plugins, you'll likely need some for individual
-" " non-standard syntaxes that aren't pre-bundled with vim. Here are some I
-" use,
-" " these are required for me, but depending on what code you write,
-" obviously
-" " this may differ for you.
+" Git support for vim
+Plugin 'tpope/vim-fugitive'
 
-" " " Proper JSON filetype detection, and support.
-" Plugin 'leshill/vim-json'
-"
-" " " vim already has syntax support for javascript, but the indent support is
-" " " horrid. This fixes that.
-" Plugin 'pangloss/vim-javascript'
-"
-" " " vim indents HTML very poorly on it's own. This fixes a lot of that.
-" Plugin 'indenthtml.vim'
-"
-" " " I write markdown a lot. This is a good syntax.
-" Plugin 'tpope/vim-markdown'
-"
-" " " LessCSS -- I use this every day.
-" Plugin 'groenewege/vim-less'
-"
+" " -- Language Support --
+
+Plugin 'leshill/vim-json'
+
+" " vim already has syntax support for javascript, but the indent support is
+" " horrid. This fixes that.
+Plugin 'pangloss/vim-javascript'
+
+" " vim indents HTML very poorly on it's own. This fixes a lot of that.
+Plugin 'indenthtml.vim'
+
+Plugin 'tpope/vim-markdown'
+
+Plugin 'groenewege/vim-less'
 
 call vundle#end()
 
 
-" ---------- End Vundle Packages ----------
+
+" " ---------- End Vundle Plugins ----------
 
 
 " " We have to turn this stuff back on if we want all of our features.
 filetype plugin indent on " Filetype auto-detection
 syntax on " Syntax highlighting
 
-set mouse=a " enable mouse
 
-set tabstop=4 " Tabs are 4 spaces
-set shiftwidth=4
-set softtabstop=4
+
+set mouse=a " enable mouse
+set tabstop=4 " tabs are 4 spaces
+set shiftwidth=4 " tabs are 4 spaces
+set softtabstop=4 " tabs are... you guessed it... 4 spaces
 set expandtab " use spaces instead of tabs.
 set smarttab " let's tab key insert 'tab stops', and bksp deletes tabs.
 set shiftround " tab / shifting moves to closest tabstop.
@@ -100,7 +96,7 @@ set nowritebackup " We have vcs, we don't need backups.
 set noswapfile " They're just annoying. Who likes them?
 
 " " don't nag me when hiding buffers
-"set hidden " allow me to have buffers with unsaved changes.
+" set hidden " allow me to have buffers with unsaved changes.
 set autoread " when a file has changed on disk, just load it. Don't ask.
 
 " " Make search more sane
@@ -111,80 +107,132 @@ set showmatch " live match highlighting
 set hlsearch " highlight matches
 set gdefault " use the `g` flag by default.
 
+set scrolloff=2 " show 2 lines above/below cursor 
+
+" Make splits default to appear to the right and below
+set splitbelow
+set splitright
+
 set number " show line numbers
 set cursorline " highlight current line
-set noruler " remove ruler so we can use statusline
+set noruler " remove ruler so we can use statusline 
+set noshowmode " remove -- MODE -- indicator (since we color statusline)
+
+" --- Status Line Setup ---
+
+" Change Color based on mode 
+function! InsertStatuslineColor(mode)
+    if a:mode == 'i'
+        hi statusline guibg=Cyan ctermfg=81 guifg=Black ctermbg=232
+    elseif a:mode == 'v'
+        hi statusline guibg=Purple ctermfg=161 guifg=Black ctermbg=0
+    else
+        hi statusline guibg=DarkRed ctermfg=1 guifg=Black ctermbg=0
+    endif
+endfunction
+
+au InsertEnter * call InsertStatuslineColor(v:insertmode)
+" This is the default for molokai
+au InsertLeave * hi statusline guibg=#455354 ctermfg=238 guifg=#455354 ctermbg=253
+
 set laststatus=2 "enable statusline
-set statusline=[%n]\ %<%.99f\%h%w%m%r%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%y%=%-16( %l,%c-%v\ %)%P
+
+set statusline=
+
+set statusline+=%<\ %{toupper(mode())}%<\ " Show current mode
+
+set statusline+=%#normal# " Switch highlight
+set statusline+=%<\ %t%<\     " File name
+set statusline+=%#error#      " Switch highlight
+set statusline+=%r            " Read Only flag
+set statusline+=%#normal# " Switch highlight
+set statusline+=\ >>
+set statusline+=\ %{fugitive#statusline()}
+
+set statusline+=%#normal# " Switch highlight
+
+set statusline+=%=           " Switch to right side
+set statusline+=%*           " Switch to normal statusline highlight
+set statusline+=%<\          " cut at start
+set statusline+=%y           " Filetype
+set statusline+=\ %c\ :      " Cursor Column
+set statusline+=\ %l%<\         " Line number 
+
 
 " " allow the cursor to go anywhere in visual block mode.
 set virtualedit+=block
 
-" " leader is a key that allows you to have your own "namespace" of keybindings.
-" " You'll see it a lot below as <leader>
+" Better command-line completion
+set wildmenu
+
+" Quickly time out on keycodes, but never time out on mappings
+set notimeout ttimeout ttimeoutlen=200
+
+" leader is a key that allows you to have your own "namespace" of
+" keybindings.
+" You'll see it a lot below as <leader>
 let mapleader = ","
 
 
 " " So we don't have to press shift when we want to get into command mode.
+" Quickly time out on keycodes, but never time out on mappings
 nnoremap ; :
 vnoremap ; :
 
 " " So we don't have to reach for escape to leave insert mode.
 inoremap jf <esc>
 
-" " " create new vsplit, and switch to it.
-" noremap <leader>v <C-w>v
+" " create new vsplit, and switch to it.
+noremap <leader>v <C-w>v
 
 " " bindings for easy split nav
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
-
+"
 " " Use sane regex's when searching
 " nnoremap / /\v
 " vnoremap / /\v
-
+"
 " " Clear match highlighting
 noremap <leader><space> :noh<cr>:call clearmatches()<cr>
 
 " " Quick buffer switching - like cmd-tab'ing
 nnoremap <leader><leader> <c-^>
 
-" Pick a buffer from the open ones
 nnoremap gb :ls<CR>:b<Space>
 
 " " Visual line nav, not real line nav
-" " If you wrap lines, vim by default won't let you move down one line to
-" the
+" " If you wrap lines, vim by default won't let you move down one line to the
 " " wrapped portion. This fixes that.
-" " noremap j gj
-" " noremap k gk
+" noremap j gj
+" noremap k gk
 
 " " Plugin settings:
-" " Below are some 'sane' (IMHO) defaults for a couple of the above plugins
-" I referenced.
-" "
+" " Below are some 'sane' (IMHO) defaults for a couple of the above plugins I
+" " referenced.
+"
 " " Map the key for toggling comments with vim-commentary
 nnoremap <leader>c <Plug>CommentaryLine
 
 " " Remap ctrlp to ctrl-t -- map it however you like, or stick with the
 " " defaults. Additionally, in my OS, I remap caps lock to control. I never
-" " use
+" use
 " " caps lock. This is highly recommended.
 " let g:ctrlp_map = '<c-t>'
 
 " " Let ctrlp have up to 30 results.
 let g:ctrlp_max_height = 30
 
-" " " Settings for airline (statusline plugin)
-" " Show paste when pasting
-" " let g:airline_detect_paste=1
-"
-" " Show airline for tabs too
-" " let g:airline#extensions#tabline#enabled = 1
+" " Settings for airline (statusline plugin)
+" Show paste when pasting
+" let g:airline_detect_paste=1
 
-" " -------- delimitMate Settings --------
+" Show airline for tabs too
+" let g:airline#extensions#tabline#enabled = 1
+
+" -------- delimitMate Settings --------
 
 let delimitMate_expand_cr = 1
 augroup mydelimitMate
@@ -195,30 +243,20 @@ augroup mydelimitMate
     au FileType python let b:delimitMate_nesting_quotes = ['"', "'"]
 augroup END
 
-" ----- xolox/vim-easytags settings -----
-"  "Where to look for tags files
-set tags=./tags;,~/.vimtags
-
-"  "Sensible defaults
-let g:easytags_events = ['BufReadPost', 'BufWritePost']
-let g:easytags_async = 1
-let g:easytags_dynamic_files = 2
-let g:easytags_resolve_links = 1
-let g:easytags_suppress_ctags_warning = 1
-
-"  " ----- majutsushi/tagbar settings -----
-"  " Open/close tagbar with ,b
+" ----- majutsushi/tagbar settings -----
+" Open/close tagbar with \b
 nmap <silent> <leader>b :TagbarToggle<CR>
-"  " Uncomment to open tagbar automatically whenever possible
-"  "autocmd BufEnter * nested :call tagbar#autoopen(0))
+" Uncomment to open tagbar automatically whenever possible
+"autocmd BufEnter * nested :call tagbar#autoopen(0))
 
-"  " ----- jistr/vim-nerdtree-tabs -----
-"  " Open/close NERDTree Tabs with ,t
+" ----- jistr/vim-nerdtree-tabs -----
+" Open/close NERDTree Tabs with \t
 nmap <silent> <leader>t :NERDTreeToggle<CR>
-"  " To have NERDTree always open on startup, set this to 1
-"  let g:nerdtree_tabs_open_on_console_startup = 1
+" To have NERDTree always open on startup, set this to 1
+let g:nerdtree_tabs_open_on_console_startup = 1
 
 " " Finally the color scheme. Choose whichever you want from the list in the
 " " link above (back up where we included the bundle of a ton of themes.)
 set t_Co=256
-colorscheme molokai
+colorscheme molokai 
+
