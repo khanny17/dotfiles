@@ -39,7 +39,7 @@ Plugin 'tpope/vim-commentary'
 "Plugin 'vim-airline/vim-airline-themes'
 
 " Auto insert matching delimiters
-Plugin 'Raimondi/delimitMate'
+"Plugin 'Raimondi/delimitMate'
 
 " Tags within files 
 Plugin 'majutsushi/tagbar'
@@ -51,6 +51,9 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 
 " Git support for vim
 Plugin 'tpope/vim-fugitive'
+
+
+
 
 " " -- Language Support --
 
@@ -66,6 +69,8 @@ Plugin 'indenthtml.vim'
 Plugin 'tpope/vim-markdown'
 
 Plugin 'groenewege/vim-less'
+
+Plugin 'octol/vim-cpp-enhanced-highlight'
 
 call vundle#end()
 
@@ -141,7 +146,7 @@ set statusline=
 
 set statusline+=%<\ %{toupper(mode())}%<\ " Show current mode
 
-set statusline+=%#normal# " Switch highlight
+set statusline+=%#identifier# " Switch highlight
 set statusline+=%<\ %t%<\     " File name
 set statusline+=%#error#      " Switch highlight
 set statusline+=%r            " Read Only flag
@@ -175,15 +180,14 @@ let mapleader = ","
 
 
 " " So we don't have to press shift when we want to get into command mode.
-" Quickly time out on keycodes, but never time out on mappings
 nnoremap ; :
 vnoremap ; :
 
-" " So we don't have to reach for escape to leave insert mode.
-inoremap jf <esc>
-
 " " create new vsplit, and switch to it.
 noremap <leader>v <C-w>v
+
+" Toggle line numbers 
+noremap <leader>n :set invnumber<CR>
 
 " " bindings for easy split nav
 nnoremap <C-h> <C-w>h
@@ -255,8 +259,6 @@ nmap <silent> <leader>t :NERDTreeToggle<CR>
 " To have NERDTree always open on startup, set this to 1
 let g:nerdtree_tabs_open_on_console_startup = 1
 
-" " Finally the color scheme. Choose whichever you want from the list in the
-" " link above (back up where we included the bundle of a ton of themes.)
 set t_Co=256
 colorscheme molokai 
 
