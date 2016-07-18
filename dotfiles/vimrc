@@ -55,6 +55,8 @@ Plugin 'tpope/vim-fugitive'
 " Syntax checking
 Plugin 'scrooloose/syntastic'
 
+" Autocompletion 
+Plugin 'Valloric/YouCompleteMe'
 
 
 " " -- Language Support --
