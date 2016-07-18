@@ -52,6 +52,8 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 " Git support for vim
 Plugin 'tpope/vim-fugitive'
 
+" Syntax checking
+Plugin 'scrooloose/syntastic'
 
 
 
@@ -156,6 +158,11 @@ set statusline+=\ %{fugitive#statusline()}
 
 set statusline+=%#normal# " Switch highlight
 
+" Syntastic statusline stuff
+set statusline+=%#errormsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
 set statusline+=%=           " Switch to right side
 set statusline+=%*           " Switch to normal statusline highlight
 set statusline+=%<\          " cut at start
@@ -258,6 +265,21 @@ nmap <silent> <leader>b :TagbarToggle<CR>
 nmap <silent> <leader>t :NERDTreeToggle<CR>
 " To have NERDTree always open on startup, set this to 1
 let g:nerdtree_tabs_open_on_console_startup = 1
+
+" ----- scrooloose/syntastic -----
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+function! ToggleErrors()
+    if empty(filter(tabpagebuflist(), 'getbufvar(v:val, "&buftype") is# "quickfix"'))
+        " No location/quickfix list shown, open syntastic error location panel
+        Errors
+    else
+        lclose
+    endif
+endfunction
+nnoremap <silent> <leader>e :<C-u>call ToggleErrors()<CR>
 
 set t_Co=256
 colorscheme molokai 
