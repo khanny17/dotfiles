@@ -53,7 +53,7 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'tpope/vim-fugitive'
 
 " Syntax checking
-Plugin 'scrooloose/syntastic'
+"Plugin 'scrooloose/syntastic'
 
 " Autocompletion 
 Plugin 'Valloric/YouCompleteMe'
@@ -158,12 +158,12 @@ set statusline+=%#normal# " Switch highlight
 set statusline+=\ >>
 set statusline+=\ %{fugitive#statusline()}
 
-set statusline+=%#normal# " Switch highlight
+set statusline+=%* " Switch highlight
 
-" Syntastic statusline stuff
-set statusline+=%#errormsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" Error Count
+"set statusline+=%#errormsg#
+"set statusline+=%{youcompleteme#GetErrorCount()}
+"set statusline+=%*
 
 set statusline+=%=           " Switch to right side
 set statusline+=%*           " Switch to normal statusline highlight
@@ -192,6 +192,9 @@ let mapleader = ","
 nnoremap ; :
 vnoremap ; :
 
+" So we dont need to reach for esc to leave insert mode
+inoremap jf <esc>
+
 " " create new vsplit, and switch to it.
 noremap <leader>v <C-w>v
 
@@ -214,6 +217,7 @@ noremap <leader><space> :noh<cr>:call clearmatches()<cr>
 " " Quick buffer switching - like cmd-tab'ing
 nnoremap <leader><leader> <c-^>
 
+" shows open buffers, then pick one by number and press enter to open it
 nnoremap gb :ls<CR>:b<Space>
 
 " " Visual line nav, not real line nav
@@ -269,19 +273,46 @@ nmap <silent> <leader>t :NERDTreeToggle<CR>
 let g:nerdtree_tabs_open_on_console_startup = 1
 
 " ----- scrooloose/syntastic -----
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-function! ToggleErrors()
-    if empty(filter(tabpagebuflist(), 'getbufvar(v:val, "&buftype") is# "quickfix"'))
-        " No location/quickfix list shown, open syntastic error location panel
-        Errors
-    else
-        lclose
-    endif
-endfunction
-nnoremap <silent> <leader>e :<C-u>call ToggleErrors()<CR>
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
+"function! ToggleErrors()
+"    if empty(filter(tabpagebuflist(), 'getbufvar(v:val, "&buftype") is# "quickfix"'))
+"        " No location/quickfix list shown, open syntastic error location panel
+"        Errors
+"    else
+"        lclose
+"    endif
+"endfunction
+"nnoremap <silent> <leader>e :<C-u>call ToggleErrors()<CR>
+
+" ----- Valloric/YouCompleteMe -----
+
+"will put icons in Vim's gutter on lines that have a diagnostic set.
+""Turning this off will also turn off the YcmErrorLine and YcmWarningLine
+"highlighting
+let g:ycm_enable_diagnostic_signs = 1
+let g:ycm_enable_diagnostic_highlighting = 1
+let g:ycm_always_populate_location_list = 1 "default 0
+let g:ycm_open_loclist_on_ycm_diags = 1 "default 1
+
+
+let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'  "where to search for .ycm_extra_conf.py if not found
+let g:ycm_confirm_extra_conf = 0 "Stop ycm from asking to run .ycm_extra_conf.py - risky, I know :/
+
+
+let g:ycm_goto_buffer_command = 'same-buffer' "[ 'same-buffer','horizontal-split', 'vertical-split', 'new-tab' ]
+let g:ycm_filetype_whitelist = { '*': 1 }
+let g:ycm_key_invoke_completion = '<C-Space>'
+
+" Force the check to run
+nnoremap <F11> :YcmForceCompileAndDiagnostics <CR>
+" Smart GoTo (decides between goto declaration, definition, whatever)
+nnoremap <F2> :YcmCompleter GoTo <CR>
+" Open Documentation for thing under cursor
+nnoremap <leader>? :YcmCompleter GetDoc <CR>
+
 
 set t_Co=256
 colorscheme molokai 
