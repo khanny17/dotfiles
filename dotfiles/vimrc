@@ -137,6 +137,8 @@ set cursorline " highlight current line
 set noruler " remove ruler so we can use statusline 
 set noshowmode " remove -- MODE -- indicator (since we color statusline)
 
+match ErrorMsg '\%>80v.\+'
+
 " --- Persistent Undo ---
 set undodir=~/.config/vim/undodir
 set undofile
