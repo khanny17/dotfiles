@@ -78,6 +78,10 @@ Plugin 'groenewege/vim-less'
 
 Plugin 'octol/vim-cpp-enhanced-highlight'
 
+Plugin 'ap/vim-css-color'
+
+Plugin 'rust-lang/rust.vim'
+
 call vundle#end()
 
 
@@ -125,9 +129,14 @@ set splitbelow
 set splitright
 
 set number " show line numbers
+set relativenumber " make line numbers relative
 set cursorline " highlight current line
 set noruler " remove ruler so we can use statusline 
 set noshowmode " remove -- MODE -- indicator (since we color statusline)
+
+" --- Persistent Undo ---
+set undodir=~/.config/vim/undodir
+set undofile
 
 " --- Status Line Setup ---
 
@@ -208,7 +217,10 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
-"
+
+" Reindent and remove trailing whitespace
+map <F7> mzgg=G`z:%s/\s\+$//e
+
 " " Use sane regex's when searching
 " nnoremap / /\v
 " vnoremap / /\v
@@ -243,6 +255,12 @@ nnoremap <leader>c <Plug>CommentaryLine
 
 " " Let ctrlp have up to 30 results.
 let g:ctrlp_max_height = 30
+
+" " exclude some commonly excluded directories and stuff
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
 " " Settings for airline (statusline plugin)
 " Show paste when pasting
@@ -316,7 +334,44 @@ nnoremap <F2> :YcmCompleter GoTo <CR>
 "" Open Documentation for thing under cursor
 nnoremap <leader>? :YcmCompleter GetDoc <CR>
 
+let g:ycm_rust_src_path = '/home/kevin/.cargo/bin/rustc'
+let g:rust_src_path = '/home/kevin/.cargo/bin/rustc'
+
 
 set t_Co=256
 colorscheme molokai 
 
+
+""""""""""""""""""""""""""""""
+"          TMUX              "
+""""""""""""""""""""""""""""""
+if exists('$TMUX')
+  function! TmuxOrSplitSwitch(wincmd, tmuxdir)
+    let previous_winnr = winnr()
+    silent! execute "wincmd " . a:wincmd
+    if previous_winnr == winnr()
+      call system("tmux select-pane -" . a:tmuxdir)
+      redraw!
+    endif
+  endfunction
+
+  let previous_title = substitute(system("tmux display-message -p '#{pane_title}'"), '\n', '', '')
+  let &t_ti = "\<Esc>]2;vim\<Esc>\\" . &t_ti
+  let &t_te = "\<Esc>]2;". previous_title . "\<Esc>\\" . &t_te
+
+  nnoremap <silent> <C-h> :call TmuxOrSplitSwitch('h', 'L')<cr>
+  nnoremap <silent> <C-j> :call TmuxOrSplitSwitch('j', 'D')<cr> 
+  nnoremap <silent> <C-k> :call TmuxOrSplitSwitch('k', 'U')<cr>
+  nnoremap <silent> <C-l> :call TmuxOrSplitSwitch('l', 'R')<cr>
+  "Remove this when they fix neovim
+  "nnoremap <silent> <C-M> :call TmuxOrSplitSwitch('j', 'D')<cr>
+  "nnoremap <silent> <BS> :call TmuxOrSplitSwitch('h', 'L')<cr>
+else
+  map <C-h> <C-w>h
+  map <C-j> <C-w>j
+  map <C-k> <C-w>k
+  map <C-l> <C-w>l
+  "Remove this when they fix neovim
+  "map <C-M> <C-w>j
+  "map <BS>  <C-w>h
+endif
