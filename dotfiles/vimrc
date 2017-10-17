@@ -58,6 +58,9 @@ Plugin 'tpope/vim-fugitive'
 " Autocompletion 
 Plugin 'Valloric/YouCompleteMe'
 
+" Syntax Checking (async, vim8)
+"Plugin 'w0rp/ale'
+
 " Real time running of code
 "Plugin 'metakirby5/codi.vim'
 
@@ -132,7 +135,7 @@ set splitbelow
 set splitright
 
 set number " show line numbers
-set relativenumber " make line numbers relative
+set relativenumber " Relative Line numbers
 set cursorline " highlight current line
 set noruler " remove ruler so we can use statusline 
 set noshowmode " remove -- MODE -- indicator (since we color statusline)
@@ -144,7 +147,7 @@ set undodir=~/.config/vim/undodir
 set undofile
 
 " --- Status Line Setup ---
-
+"
 " Change Color based on mode 
 function! InsertStatuslineColor(mode)
     if a:mode == 'i'
@@ -343,6 +346,20 @@ nnoremap <leader>? :YcmCompleter GetDoc <CR>
 let g:ycm_rust_src_path = '/home/kevin/.cargo/bin/rustc'
 let g:rust_src_path = '/home/kevin/.cargo/bin/rustc'
 
+" --- Codi ---
+
+" Fix bug where codi doesnt have executable access to /tmp/cmd
+function s:AllowCodi()
+   if empty(glob('/tmp/cmd'))
+       call system('touch /tmp/cmd')
+   endif
+
+   call system('chmod u+x /tmp/cmd')
+endfunction
+autocmd VimEnter * call s:AllowCodi()
+
+" --- w0rp/ale ---
+let g:ale_rust_cargo_use_check = 1
 
 set t_Co=256
 colorscheme molokai 
