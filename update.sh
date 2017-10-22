@@ -2,5 +2,5 @@
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 set -e -x
 
-# Vim
-./$SCRIPT_DIR/vimrc/setup.sh
+git pull
+./$SCRIPT_DIR/setup.sh
