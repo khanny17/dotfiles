@@ -19,3 +19,6 @@ $SCRIPT_DIR/vim/setup.sh
 
 # Rust
 $SCRIPT_DIR/rust/setup.sh
+
+# tmux
+$SCRIPT_DIR/tmux/setup.sh
