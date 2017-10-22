@@ -1,2 +1,3 @@
 alias tmux='tmux -2'
 alias gs='git status'
+alias dafuq='strace -s9999 write -p'

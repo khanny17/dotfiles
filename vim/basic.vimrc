@@ -1,4 +1,4 @@
-" " Basic Configurations 
+" " Basic Configurations
 
 set t_Co=256
 colorscheme molokai
@@ -30,7 +30,7 @@ set showmatch " live match highlighting
 set hlsearch " highlight matches
 set gdefault " use the `g` flag by default.
 
-set scrolloff=2 " show 2 lines above/below cursor 
+set scrolloff=2 " show 2 lines above/below cursor
 
 " Make splits default to appear to the right and below
 set splitbelow
@@ -39,10 +39,12 @@ set splitright
 set number " show line numbers
 set relativenumber " make line numbers relative
 set cursorline " highlight current line
-set noruler " remove ruler so we can use statusline 
+set noruler " remove ruler so we can use statusline
 set noshowmode " remove -- MODE -- indicator (since we color statusline)
 
-match ErrorMsg '\%>80v.\+' " Highlight chars over 80
+" Highlight lines over 80 and trailing whitespace
+highlight EWOL ctermbg=darkgreen guibg=darkgreen
+match EWOL '\s\+$\|\%>80v.\+'
 
 " --- Persistent Undo ---
 set undofile
@@ -74,7 +76,7 @@ inoremap jf <esc>
 " Create new vsplit, and switch to it.
 noremap <leader>v <C-w>v
 
-" Toggle line numbers 
+" Toggle line numbers
 noremap <leader>n :set invnumber<CR>
 
 " " bindings for easy split nav
@@ -84,7 +86,7 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
 " Reindent and remove trailing whitespace
-map <F7> mzgg=G`z:%s/\s\+$//e
+map <F7> mzgg=G`z:%s/\s\+$//e<cr>
 
 " Clear match highlighting
 noremap <leader><space> :noh<cr>:call clearmatches()<cr>
