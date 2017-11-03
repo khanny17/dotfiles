@@ -1,0 +1,43 @@
+URxvt*scrollBar: false
+
+! colors and such
+
+! special
+urxvt*foreground:   #c5c8c6
+urxvt*background:   #131315
+*cursorColor:  #c5c8c6
+
+!black
+*color0:       #282a2e
+*color8:       #373b41
+
+!red
+*color1:       #a51212
+*color9:       #cc3838
+
+!green
+*color2:       #9ead14
+*color10:      #cad74f
+
+!yellow
+*color3:       #e78523
+*color11:      #f0a630
+
+!blue
+*color4:       #3684c3
+*color12:      #81a2be
+
+!magenta
+*color5:       #b552d6
+*color13:      #ba80cb
+
+!cyan
+*color6:       #5ab2a7
+*color14:      #8acbc2
+
+!white
+*color7:       #929ca7
+*color15:      #d6dad8
+
+urxvt*transparent: true
+urxvt*shading: 15
