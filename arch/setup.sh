@@ -3,7 +3,7 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 set -x
 
 # FIRST: packages
-sudo pacman -S vim git python3
+sudo pacman -S vim git python3 openssh unzip
 
 # NEXT: display stuff
 
