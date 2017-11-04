@@ -23,3 +23,5 @@ feh --bg-fill $(find ~/bg -type f | shuf -n 1)
 
 # Virtualbox stuff
 VBoxClient-all
+
+~/dotfiles/arch/lemonbar-start.sh &

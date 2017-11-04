@@ -19,3 +19,6 @@ rustup update nightly
 rustup component add rls-preview --toolchain nightly
 rustup component add rust-analysis --toolchain nightly
 rustup component add rust-src --toolchain nightly
+
+# Install Racer
+cargo install racer

@@ -11,9 +11,9 @@ Plug 'tpope/vim-fugitive' " git support for vim
 
 Plug 'tpope/vim-commentary' " Support for easily toggling comments.
 
-Plug 'jiangmiao/auto-pairs' " {} () etc
-
 Plug 'w0rp/ale' " Syntax checking
+
+Plug 'maralla/completor.vim' " Autcompletion
 
 " --- Language Support ---
 Plug 'rust-lang/rust.vim'

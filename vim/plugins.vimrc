@@ -21,5 +21,9 @@ nmap <silent> <leader>t :NERDTreeToggle<CR>
 let g:ale_linters = {'rust': ['rls']}
 let g:ale_completion_enabled = 1
 
+" --- maralla/completor ---
+let g:completor_clang_binary = '/usr/bin/clang'
+let g:completor_racer_binary = '/home/kevin/.cargo/bin/racer'
+
 nmap <silent> <C-e> <Plug>(ale_previous_wrap)
 nmap <silent> <C-E> <Plug>(ale_next_wrap)
