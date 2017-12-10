@@ -32,4 +32,4 @@ mkdir ~/.mpd/playlists
 # NEXT: lockscreen
 
 git clone https://github.com/pavanjadhaw/betterlockscreen
-sudo mv betterlockscreen/lock.sh /usr/bin/betterlockscreen
+sudo mv betterlockscreen/lock.sh /usr/bin/betterlock

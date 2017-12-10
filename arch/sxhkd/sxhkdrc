@@ -15,6 +15,12 @@ super + Escape
 	pkill -USR1 -x sxhkd
 
 #
+# lockscreen
+#
+ctrl + Escape
+    betterlock -l blur
+
+#
 # bspwm hotkeys
 #
 
