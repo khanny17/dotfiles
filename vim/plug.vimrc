@@ -17,5 +17,6 @@ Plug 'maralla/completor.vim' " Autcompletion
 
 " --- Language Support ---
 Plug 'rust-lang/rust.vim'
+Plug 'mxw/vim-jsx'
 
 call plug#end()

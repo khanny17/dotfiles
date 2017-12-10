@@ -41,3 +41,6 @@ urxvt*background:   #131315
 
 urxvt*transparent: true
 urxvt*shading: 15
+URxvt.keysym.Shift-Control-V: perl:clipboard:paste
+URxvt.iso14755: False
+URxvt.perl-ext-common: default,clipboard
