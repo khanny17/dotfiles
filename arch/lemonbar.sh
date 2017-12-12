@@ -1,4 +1,11 @@
 #!/bin/bash
+set -e -x
+
+__cleanup() {
+    pkill lemonbar
+}
+
+trap __cleanup PIPE
 
 clock() {
     date '+%b %d %l:%M:%S %p'
