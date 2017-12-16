@@ -3,7 +3,7 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 set -x
 
 # FIRST: packages
-sudo pacman -S compton feh imagemagick rxvt-unicode sxhkd bspwm vim git python3 openssh unzip gdb mpd ncmpcpp xorg-xinit xorg screen
+sudo pacman -S rofi compton feh imagemagick rxvt-unicode sxhkd bspwm vim git python3 openssh unzip gdb mpd ncmpcpp xorg-xinit xorg screen
 
 # NEXT: display stuff
 
