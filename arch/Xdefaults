@@ -44,3 +44,6 @@ urxvt*shading: 15
 URxvt.keysym.Shift-Control-V: perl:clipboard:paste
 URxvt.iso14755: False
 URxvt.perl-ext-common: default,clipboard
+
+URxvt.font: xft:Source Code Pro:size=16
+URxvt.letterSpace: -5

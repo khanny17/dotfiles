@@ -3,7 +3,7 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 set -x
 
 # FIRST: packages
-sudo pacman -S vim git python3 openssh unzip gdb mpd ncmpcpp
+sudo pacman -S compton feh imagemagick rxvt-unicode sxhkd bspwm vim git python3 openssh unzip gdb mpd ncmpcpp xorg-xinit xorg screen
 
 # NEXT: display stuff
 
@@ -14,6 +14,10 @@ ln -s $SCRIPT_DIR/bspwm/bspwmrc ~/.config/bspwm/bspwmrc
 mkdir -p ~/.config/sxhkd
 mv ~/.config/sxhkd/sxhkdrc ~/.config/sxhkd/sxhkdrc.old
 ln -s $SCRIPT_DIR/sxhkd/sxhkdrc ~/.config/sxhkd/sxhkdrc
+
+mkdir -p ~/.config/alacritty
+mv ~/.config/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml.old
+ln -s $SCRIPT_DIR/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
 
 mv ~/.xinitrc .xinitrc.old
 ln -s $SCRIPT_DIR/xinitrc ~/.xinitrc

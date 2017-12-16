@@ -2,6 +2,7 @@
 
 sxhkd &
 panel &
+compton -b
 
 bspc monitor -d I II III IV V VI VII VIII IX X
 
@@ -20,8 +21,5 @@ bspc rule -a Screenkey manage=off
 
 # Background
 feh --bg-fill $(find ~/bg -type f | shuf -n 1)
-
-# Virtualbox stuff
-VBoxClient-all
 
 ~/dotfiles/arch/lemonbar-start.sh &

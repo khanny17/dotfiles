@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e -x
+set -e
 
 __cleanup() {
     pkill lemonbar
