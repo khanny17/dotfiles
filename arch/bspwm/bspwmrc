@@ -2,6 +2,7 @@
 
 sxhkd &
 panel &
+compton -b
 
 bspc monitor -d I II III IV V VI VII VIII IX X
 
