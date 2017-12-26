@@ -15,6 +15,8 @@ Plug 'w0rp/ale' " Syntax checking
 
 Plug 'maralla/completor.vim' " Autcompletion
 
+Plug 'dylanaraps/wal.vim' " match colorscheme to wal setting
+
 " --- Language Support ---
 Plug 'rust-lang/rust.vim'
 Plug 'mxw/vim-jsx'

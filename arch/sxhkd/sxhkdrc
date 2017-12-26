@@ -21,6 +21,27 @@ ctrl + Escape
     betterlock -l blur
 
 #
+# Screen
+#
+XF86MonBrightness{Up,Down}
+    backlight {+,-}5%
+
+ctrl + alt + s
+    maim -s | xclip -selection clipboard -t image/png
+
+#
+# music
+#
+XF86Audio{Raise,Lower}Volume
+    amixer sset Master {1+,1-} unmute
+XF86AudioMute
+    amixer set Master 0+ toggle && amixer sset Speaker 1+ unmute
+ctrl + XF86AudioPlay
+    mpc toggle
+ctrl + XF86Audio{Next,Prev}
+    mpc {next,prev}
+
+#
 # bspwm hotkeys
 #
 

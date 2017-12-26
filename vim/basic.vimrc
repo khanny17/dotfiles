@@ -1,7 +1,10 @@
 " " Basic Configurations
 
 set t_Co=256
-colorscheme molokai
+colorscheme wal
+syntax on
+set background=dark
+highlight Normal ctermbg=234 ctermfg=white
 
 set mouse=a " enable mouse
 set tabstop=4 " tabs are 4 spaces
@@ -39,6 +42,9 @@ set splitright
 set number " show line numbers
 set relativenumber " make line numbers relative
 set cursorline " highlight current line
+hi clear CursorLine
+hi CursorLine gui=underline cterm=underline
+hi CursorLineNr term=bold ctermfg=11
 set noruler " remove ruler so we can use statusline
 set noshowmode " remove -- MODE -- indicator (since we color statusline)
 
