@@ -18,7 +18,7 @@ super + Escape
 # lockscreen
 #
 ctrl + Escape
-    betterlock -l blur
+    ~/dotfiles/arch/rand-lock.sh --lock
 
 #
 # Screen

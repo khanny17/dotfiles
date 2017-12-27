@@ -25,16 +25,6 @@ do
 done
 set -- "${POSITIONAL[@]}" # restore positional parameters
 
-#overlay="$HOME/bg/space.jpg"
-#image="/tmp/screen.png"
-#
-#
-#ffmpeg -loglevel quiet -f x11grab -video_size 2560x1440 -y -i $DISPLAY -i $overlay -filter_complex "boxblur=10,overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2" -vframes 1 $image
-#
-#feh "$image" &
-#i3lock "${param[@]}" -i "$image" -n
-#sleep 0.05 ; killall feh
-
 ###############################################################################
 # Wrapper around i3lock to choose a random lockscreen image every time the
 # computer is locked
@@ -97,7 +87,11 @@ lock() {
 if [ "$UPDATE" = true ]; then
     update_scaled
 elif [ "$LOCK" = true ]; then
-    lock $(find $SCALED_DIR -type f | shuf -n 1)
+    # First check to see if the screen is already locked
+    ps aux | grep i3lock | grep -v grep
+    if [ "$?" == "1" ]; then
+        lock $(find $SCALED_DIR -type f | shuf -n 1)
+    fi
 else
     echo "Specify --update or --lock. Nothing to do"
 fi

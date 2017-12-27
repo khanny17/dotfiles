@@ -102,3 +102,7 @@ nnoremap <leader><leader> <c-^>
 
 " Shows open buffers, then pick one by number and press enter to open it
 nnoremap gb :ls<CR>:b<Space>
+
+
+" Language specific shit
+autocmd FileType javascript.jsx setlocal shiftwidth=2 tabstop=2
