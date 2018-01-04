@@ -4,7 +4,7 @@ set t_Co=256
 colorscheme wal
 syntax on
 set background=dark
-highlight Normal ctermbg=234 ctermfg=white
+highlight Normal ctermbg=black ctermfg=white
 
 set mouse=a " enable mouse
 set tabstop=4 " tabs are 4 spaces

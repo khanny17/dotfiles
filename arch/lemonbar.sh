@@ -12,7 +12,7 @@ trap __cleanup PIPE
 
 clock() {
     out=$(date '+%b %d %l:%M%P')
-#    echo "\uf017" # clock icon
+    echo "\uf017" # clock icon
     echo "$out"
 }
 
@@ -99,9 +99,19 @@ volume() {
     fi
 }
 
+msgs() {
+    # Do a nonblocking read of the fifo. If there is something new, show stuff!
+    read -t 0.5 DAMMIT < /tmp/lemonbar-msgs-fifo #TODO
+}
+
+brightness() {
+    level=$(xbacklight -get)
+    echo "\uf185" %{O1} ${level:0:2}
+}
+
 while :; do
     o=""
-    o="%{l} $(wifi) %{r} $(clock) %{O2} $(volume) %{O2} $(music) $(battery)"
+    o="%{l} $(wifi) %{r} $(brightness) %{O2} $(clock) %{O2} $(volume) %{O2} $(music) $(battery)"
     echo -e $o
     sleep 1
 done
