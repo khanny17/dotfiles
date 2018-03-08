@@ -28,6 +28,7 @@ wifi() {
 }
 
 battery() {
+#TODO make battery red when low
     cap=$(cat /sys/class/power_supply/BAT0/capacity)
     if [ "$?" -eq "0" ] ; then
         # Cool, we got a value
@@ -111,7 +112,7 @@ brightness() {
 
 while :; do
     o=""
-    o="%{l} $(wifi) %{r} $(brightness) %{O2} $(clock) %{O2} $(volume) %{O2} $(music) $(battery)"
+    o="%{l} $(wifi) %{r} $(clock) %{O2} $(volume) %{O2} $(battery)"
     echo -e $o
     sleep 1
 done

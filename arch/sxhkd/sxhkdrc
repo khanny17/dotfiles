@@ -48,7 +48,7 @@ ctrl + XF86Audio{Next,Prev}
 #
 
 # quit bspwm normally
-super + alt + Escape
+super + alt + shift + Escape
 	bspc quit
 
 # close and kill
@@ -83,9 +83,13 @@ super + ctrl + {x,y,z}
 # focus/swap
 #
 
-# focus the node in the given direction
-ctrl + {_,shift + }{h,j,k,l}
-	bspc node -{f,s} {west,south,north,east}
+# focus the node in the direction
+ctrl + {h,j,k,l}
+    /home/kevin/.vim/plugged/vim-bspwm/script/winmove {left,down,up,right}
+
+# swap the node in the given direction
+ctrl + shift + {h,j,k,l}
+	bspc node -s {west,south,north,east}
 
 # focus the node for the given path jump
 super + {p,b,comma,period}

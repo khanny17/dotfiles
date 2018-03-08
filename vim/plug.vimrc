@@ -17,6 +17,8 @@ Plug 'maralla/completor.vim' " Autcompletion
 
 Plug 'dylanaraps/wal.vim' " match colorscheme to wal setting
 
+Plug 'bentglasstube/vim-bspwm' " Integrate splits with bspwm windows
+
 " --- Language Support ---
 Plug 'rust-lang/rust.vim'
 Plug 'mxw/vim-jsx'

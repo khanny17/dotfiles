@@ -86,10 +86,10 @@ noremap <leader>v <C-w>v
 noremap <leader>n :set invnumber<CR>
 
 " " bindings for easy split nav
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+"nnoremap <C-h> <C-w>h
+"nnoremap <C-j> <C-w>j
+"nnoremap <C-k> <C-w>k
+"nnoremap <C-l> <C-w>l
 
 " Reindent and remove trailing whitespace
 map <F7> mzgg=G`z:%s/\s\+$//e<cr>
@@ -103,6 +103,8 @@ nnoremap <leader><leader> <c-^>
 " Shows open buffers, then pick one by number and press enter to open it
 nnoremap gb :ls<CR>:b<Space>
 
-
 " Language specific shit
 autocmd FileType javascript.jsx setlocal shiftwidth=2 tabstop=2
+
+" 'W' to write with sudo when you forget
+command W w !sudo tee % > /dev/null

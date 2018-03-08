@@ -45,5 +45,5 @@ URxvt.keysym.Shift-Control-V: perl:clipboard:paste
 URxvt.iso14755: False
 URxvt.perl-ext-common: default,clipboard
 
-URxvt.font: xft:Source Code Pro:size=16
+URxvt.font: xft:monaco:size=20
 URxvt.letterSpace: -5
