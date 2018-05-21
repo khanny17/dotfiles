@@ -88,9 +88,28 @@ volume() {
         head -n $(( $SINK + 1 )) |\
         tail -n 1 |\
         sed -e 's,.* \([0-9][0-9]*\)%.*,\1,')
-    if [ "$?" -eq "0" ] ; then
+
+    using_headphones=$(amixer sget Headphone |
+        tail -n 1 |
+        sed -n 's/.*\[\(.*\)\].*\[.*\].*\]/\1/p')
+    if [ -z "$using_headphones" ] ; then
+        echo
+    else
+        if [ "$using_headphones" != "0%" ] ; then
+            echo "\uf025"
+        fi
+    fi
+
+    using_speaker=$(amixer sget Speaker |
+        tail -n 1 |
+        sed -n 's/.*\[\(.*\)\].*\[.*\].*\]/\1/p')
+    if [ -z "$using_speaker" ] ; then
+        echo
+    elif [ "$using_speaker" == "0%" ] ; then
+        echo
+    else
         # Cool, we got a value
-        if [ "$level" -gt "25" ] ; then
+        if [ "$level" -gt "50" ] ; then
             echo "\uf028"
         elif [ "$level" -gt "1" ] ; then
             echo "\uf027"
@@ -98,6 +117,8 @@ volume() {
             echo "\uf026"
         fi
     fi
+
+    # echo "$level"%
 }
 
 msgs() {

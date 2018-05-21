@@ -3,4 +3,6 @@ export QT_IM_MODULE='uim'
 uim-xim &
 export XMODIFIERS='@im=uim'
 wal -R
+autocutsel -fork &
+autocutsel -selection PRIMARY -fork &
 exec bspwm

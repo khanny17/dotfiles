@@ -37,11 +37,11 @@ ctrl + alt + s
 XF86Audio{Raise,Lower}Volume
     amixer sset Master {1+,1-} unmute
 XF86AudioMute
-    amixer set Master 0+ toggle && amixer sset Speaker 1+ unmute
-ctrl + XF86AudioPlay
-    mpc toggle
-ctrl + XF86Audio{Next,Prev}
-    mpc {next,prev}
+    amixer set Master 0+ toggle && amixer sset Speaker unmute && amixer sset Headphone unmute
+XF86AudioPlay
+    playerctl play-pause
+XF86Audio{Next,Prev}
+    playerctl {next,previous}
 
 #
 # bspwm hotkeys

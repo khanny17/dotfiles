@@ -19,8 +19,12 @@ Plug 'dylanaraps/wal.vim' " match colorscheme to wal setting
 
 Plug 'bentglasstube/vim-bspwm' " Integrate splits with bspwm windows
 
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
+
 " --- Language Support ---
 Plug 'rust-lang/rust.vim'
 Plug 'mxw/vim-jsx'
+Plug 'suoto/vim-hdl'
 
 call plug#end()

@@ -37,3 +37,7 @@ nmap <silent> <C-E> <Plug>(ale_next_wrap)
 
 " --- mxw/vim-jsx ---
 let g:jsx_ext_required = 0
+
+" --- junegunn/goyo.vim AND junngunn/limelight.vim ---
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
