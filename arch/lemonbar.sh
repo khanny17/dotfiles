@@ -56,20 +56,35 @@ battery() {
 #    fi
 }
 
-music() {
-    track=$(mpc status | head -n 1)
+music_title() {
+    STATUS=$(playerctl status 2>/dev/null)
+    if (( $? != 0 )) ; then
+        # Not working, probs just nothing open
+        return 1
+    fi
+
+    # First arg is counter
+    if [ "$1" -eq "0" ] ; then
+        playerctl metadata title
+    elif [ "$1" -eq "1" ] ; then
+        playerctl metadata artist
+    fi
+}
+
+music_status() {
+    STATUS=$(playerctl status 2>/dev/null)
+    if (( $? != 0 )) ; then
+        # Not working, probs just nothing open
+        return 1
+    fi
 
     # determine if playing
-    mpc status |\
-        head -n 2 |\
-        tail -n 1 |\
-        grep -q playing && playing=true || playing=false
+    echo $STATUS|\
+        grep -q Playing && playing=true || playing=false
 
     # determine if paused
-    mpc status |\
-        head -n 2 |\
-        tail -n 1 |\
-        grep -q paused && paused=true || paused=false
+    echo $STATUS|\
+        grep -q Paused && paused=true || paused=false
 
     if $playing; then
         echo "\uf04b"
@@ -131,9 +146,21 @@ brightness() {
     echo "\uf185" %{O1} ${level:0:2}
 }
 
+music_title_cycle=0
+cycle_fraction=0
 while :; do
     o=""
-    o="%{l} $(wifi) %{r} $(clock) %{O2} $(volume) %{O2} $(battery)"
+    o="%{l} $(wifi) %{O4} 
+       $(music_status) $(music_title $music_title_cycle)
+       %{r} $(clock) %{O2} $(volume) %{O2}
+       $(battery)"
     echo -e $o
     sleep 1
+
+    if (( $cycle_fraction == 10 )) ; then
+        music_title_cycle=$(((music_title_cycle+1) % 2))
+        cycle_fraction=0
+    fi
+    cycle_fraction=$((cycle_fraction+1))
+
 done

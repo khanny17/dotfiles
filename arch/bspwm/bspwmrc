@@ -31,4 +31,4 @@ bspc config presel_border_color "$color1"
 $SCRIPT_DIR/set-bg.sh &
 
 # Show statusbar
-~/dotfiles/arch/lemonbar-start.sh &
+#~/dotfiles/arch/lemonbar-start.sh &
