@@ -41,4 +41,4 @@ git clone https://github.com/pavanjadhaw/betterlockscreen
 sudo mv betterlockscreen/lock.sh /usr/bin/betterlock
 
 # NEXT: wal - wallpaper and colorscheme setter
-sudo pip3 install pywal
+sudo pacman -S python-pywal
