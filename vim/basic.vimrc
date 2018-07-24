@@ -108,3 +108,6 @@ autocmd FileType javascript.jsx setlocal shiftwidth=2 tabstop=2
 
 " 'W' to write with sudo when you forget
 command W w !sudo tee % > /dev/null
+
+set listchars=tab:>-,trail:.,extends:>,precedes:<,space:.
+nnoremap <leader>i :set list!<CR>
