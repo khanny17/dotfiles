@@ -3,7 +3,12 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 set -x
 
 # FIRST: packages
-sudo pacman -S compton feh imagemagick rxvt-unicode sxhkd bspwm vim git python3 python-pip openssh unzip gdb mpd ncmpcpp xorg-xinit xorg screen alsa-utils
+sudo pacman -S compton feh imagemagick rxvt-unicode sxhkd bspwm vim git python3 python-pip openssh unzip gdb mpd ncmpcpp xorg-xinit xorg screen alsa-utils fzf zsh
+
+# NEXT: zsh
+sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+# TODO: does this set zsh as default shell?
+
 
 # NEXT: display stuff
 

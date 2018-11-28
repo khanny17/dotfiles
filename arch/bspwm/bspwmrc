@@ -2,7 +2,7 @@
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 sxhkd &
-panel &
+dunst &
 compton -b
 
 bspc monitor -d I II III IV V VI VII VIII IX X
@@ -13,10 +13,6 @@ bspc config window_gap           5
 bspc config split_ratio          0.52
 bspc config borderless_monocle   true
 bspc config gapless_monocle      true
-
-bspc rule -a mplayer2 state=floating
-bspc rule -a Kupfer.py focus=on
-bspc rule -a Screenkey manage=off
 
 # source the colors.
 . "${HOME}/.cache/wal/colors.sh"
@@ -31,4 +27,4 @@ bspc config presel_border_color "$color1"
 $SCRIPT_DIR/set-bg.sh &
 
 # Show statusbar
-#~/dotfiles/arch/lemonbar-start.sh &
+~/dotfiles/arch/lemonbar-start.sh &

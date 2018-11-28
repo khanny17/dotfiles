@@ -23,7 +23,7 @@ Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 
 " --- Language Support ---
-Plug 'rust-lang/rust.vim'
+"Plug 'rust-lang/rust.vim'
 Plug 'mxw/vim-jsx'
 Plug 'suoto/vim-hdl'
 
